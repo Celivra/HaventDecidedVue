@@ -1,0 +1,98 @@
+<template>
+  <el-container class="login-container">
+    <el-card class="login-card" shadow="always">
+      <h2 class="title">欢迎登录</h2>
+      <el-form :model="form" ref="loginForm" label-width="80px">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" placeholder="请输入用户名" />
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
+        </el-form-item>
+          <el-button type="primary" style="width: 30%" @click="login">登 录</el-button>
+          <el-button type="primary" style="width: 30%" @click="register">注 册</el-button>
+        <div class="message" v-if="message" :style="{ color: messageColor }">
+          {{ message }}
+        </div>
+      </el-form>
+    </el-card>
+  </el-container>
+</template>
+
+<script>
+export default {
+  name: "LoginComp",
+  data() {
+    return {
+      form: {
+        username: '',
+        password: ''
+      },
+      message: '',
+      messageColor: 'red'
+    };
+  },
+  methods: {
+    register(){
+
+    },
+    async login() {
+      if (!this.form.username || !this.form.password) {
+        this.message = 'Please fill out Username and Password';
+        this.messageColor = 'red';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:8080/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.form)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.messageColor = 'green';
+          this.message = result.message
+          localStorage.setItem('user', JSON.stringify(result.user))
+          this.$router.push('/dashboard');
+        } else {
+          this.messageColor = 'red';
+          this.message = result.message
+        }
+      } catch (err) {
+        this.messageColor = 'red';
+        this.message = 'Internet Error';
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+.login-container {
+  height: 100vh;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 400px;
+  padding: 30px 20px;
+  border-radius: 52px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.message {
+  text-align: center;
+  margin-top: 10px;
+}
+</style>
