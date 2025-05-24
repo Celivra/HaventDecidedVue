@@ -1,6 +1,7 @@
 <template>
     <p>this is dashboard page</p>
     <p>hello <span class="uName">{{ username }}</span></p>
+    <button v-on:click="logout">Logout</button>
 </template>
 <script>
 export default{
@@ -13,6 +14,12 @@ export default{
     created(){
         const user = JSON.parse(localStorage.getItem('user'));
         this.username = user.username
+    },
+    methods:{
+        logout(){
+            localStorage.removeItem('user')
+            this.$router.push('/')
+        }
     }
 
 }
