@@ -9,6 +9,21 @@
         <el-form-item label="Email" prop="email">
           <el-input v-model="form.email"/>
         </el-form-item>
+
+        <!--ver code-->
+        <el-form-item label="验证码" prop="code">
+          <el-row :gutter="10">
+            <el-col :span="14">
+              <el-input v-model="form.code" placeholder="请输入验证码" />
+            </el-col>
+            <el-col :span="10">
+              <el-button :disabled="countDown > 0" @click="sendCode">
+                {{ countDown > 0 ? `${countDown}s后重试` : '发送验证码' }}
+              </el-button>
+            </el-col>
+          </el-row>
+        </el-form-item>
+
         <el-form-item label="Phone" prop="phone">
           <el-input v-model="form.phone"/>
         </el-form-item>
@@ -40,8 +55,11 @@ export default {
         username: '',
         email: '',
         phone: '',
-        password: ''
+        password: '',
+        code:''
       },
+      countDown:0,
+      timer:null,
       confirmPassword: '',
       message: '',
       messageColor: 'red',
@@ -77,7 +95,7 @@ export default {
       this.$refs.registerForm.validate(async valid => {
         if (!valid) return;
         try{
-          const response = await axios.post('/register', this.form);
+          const response = await axios.post('user/register', this.form);
           const result = response.data;
           if(result.success){
             this.messageColor = 'green';
@@ -92,7 +110,40 @@ export default {
         }
 
       });
-    }
+    },
+    async sendCode() {
+      if (!this.form.email) {
+        this.message = '请先填写邮箱';
+        this.messageColor = 'red';
+        return;
+      }
+// vcio mmnk jfeu sdhd
+      try {
+        const res = await axios.post('api/send-email-code', { email: this.form.email });
+        const result = res.data;
+        if (result.success) {
+          this.messageColor = 'green';
+          this.message = '验证码已发送到邮箱';
+          this.startCountdown();  // 开始倒计时
+        } else {
+          this.messageColor = 'red';
+          this.message = result.message || '发送失败';
+        }
+      } catch (err) {
+        this.messageColor = 'red';
+        this.message = '网络错误，发送失败';
+      }
+    },
+    startCountdown() {
+      this.countDown = 60;
+      this.timer = setInterval(() => {
+        this.countDown--;
+        if (this.countDown <= 0) {
+          clearInterval(this.timer);
+          this.timer = null;
+        }
+      }, 1000);
+    },
   }
 };
 </script>
