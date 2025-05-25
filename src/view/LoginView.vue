@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "LoginComp",
   data() {
@@ -43,28 +45,24 @@ export default {
         return;
       }
 
-      try {
-        const response = await fetch('http://localhost:8080/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(this.form)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
+      try{
+        const respon = await axios.post('http://192.168.1.8:8080/api/login',this.form)
+        const result = respon.data
+        if(result.success){
           this.messageColor = 'green';
-          this.message = result.message
-          localStorage.setItem('user', JSON.stringify(result.user))
-          this.$router.push('/dashboard');
+          this.message = result.message;
+          localStorage.setItem('user', JSON.stringify(result.user));
+          this.$router.push('/dashboard')
         } else {
           this.messageColor = 'red';
-          this.message = result.message
+          this.message = result.message;
         }
-      } catch (err) {
+
+      }catch(err){
         this.messageColor = 'red';
         this.message = 'Internet Error';
       }
+
     }
   }
 };
