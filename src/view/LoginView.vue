@@ -1,16 +1,16 @@
 <template>
   <el-container class="login-container">
     <el-card class="login-card" shadow="always">
-      <h2 class="title">欢迎登录</h2>
+      <h2 class="title">Welcome</h2>
       <el-form :model="form" ref="loginForm" label-width="80px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username" placeholder="请输入用户名" />
+        <el-form-item label="Username" prop="username">
+          <el-input v-model="form.username" placeholder="Please input username" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
+        <el-form-item label="Password" prop="password">
+          <el-input v-model="form.password" type="password" placeholder="Please input password" show-password />
         </el-form-item>
-          <el-button type="primary" style="width: 30%" @click="login">登 录</el-button>
-          <el-button type="primary" style="width: 30%" @click="register">注 册</el-button>
+        <el-button type="primary" style="width: 30%" @click="login">Login</el-button>
+        <el-button type="primary" style="width: 30%" @click="register">Register</el-button>
         <div class="message" v-if="message" :style="{ color: messageColor }">
           {{ message }}
         </div>
@@ -23,7 +23,7 @@
 import axios from 'axios';
 
 export default {
-  name: "LoginComp",
+  name: "LoginView",
   data() {
     return {
       form: {
@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     register(){
-
+      console.log("to reg")
+      this.$router.push('/register')
     },
     async login() {
       if (!this.form.username || !this.form.password) {
@@ -46,7 +47,7 @@ export default {
       }
 
       try{
-        const respon = await axios.post('http://192.168.1.8:8080/api/login',this.form)
+        const respon = await axios.post('/login',this.form)
         const result = respon.data
         if(result.success){
           this.messageColor = 'green';
@@ -80,7 +81,7 @@ export default {
 .login-card {
   width: 400px;
   padding: 30px 20px;
-  border-radius: 52px;
+  border-radius: 35px;
 }
 
 .title {
