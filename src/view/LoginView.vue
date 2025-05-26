@@ -47,7 +47,7 @@ export default {
       }
 
       try{
-        const respon = await axios.post('user/login',this.form)
+        const respon = await axios.post('/user/login',this.form)
         const result = respon.data
         if(result.success){
           this.messageColor = 'green';

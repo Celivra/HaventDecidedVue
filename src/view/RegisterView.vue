@@ -119,9 +119,10 @@ export default {
       }
 // vcio mmnk jfeu sdhd
       try {
-        const res = await axios.post('api/send-email-code', { email: this.form.email });
+        const res = await axios.post('api/sendCode', { email: this.form.email });
         const result = res.data;
-        if (result.success) {
+        console.log(result);
+        if (result) {
           this.messageColor = 'green';
           this.message = '验证码已发送到邮箱';
           this.startCountdown();  // 开始倒计时
