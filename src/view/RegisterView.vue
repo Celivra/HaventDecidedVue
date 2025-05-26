@@ -1,12 +1,12 @@
 <template>
   <el-container class="register-container">
     <el-card class="register-card" shadow="always">
-      <h2 class="title">Register</h2>
+      <h2 class="title">注册</h2>
       <el-form :model="form" :rules="rules" ref="registerForm" label-width="100px">
-        <el-form-item label="Username" prop="username">
+        <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" />
         </el-form-item>
-        <el-form-item label="Email" prop="email">
+        <el-form-item label="邮箱" prop="email">
           <el-input v-model="form.email"/>
         </el-form-item>
 
@@ -24,18 +24,18 @@
           </el-row>
         </el-form-item>
 
-        <el-form-item label="Phone" prop="phone">
+        <el-form-item label="手机号" prop="phone">
           <el-input v-model="form.phone"/>
         </el-form-item>
-        <el-form-item label="Password" prop="password">
+        <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" type="password" show-password />
         </el-form-item>
-        <el-form-item label="ConfirmPd" prop="confirmPassword">
+        <el-form-item label="确认密码" prop="confirmPassword">
           <el-input v-model="form.confirmPassword" type="password" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 40%" @click="register">Register</el-button>
-          <el-button type="primary" style="width: 40%" @click="login">Back</el-button>
+          <el-button type="primary" style="width: 40%" @click="register">注册</el-button>
+          <el-button type="primary" style="width: 40%" @click="login">返回</el-button>
         </el-form-item>
         <div class="message" v-if="message" :style="{ color: messageColor }">
           {{ message }}
@@ -69,7 +69,6 @@ export default {
           { required: true, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ],
-        phone:[{required:true, message: 'Please input phone number', trigger:'blur'}],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         confirmPassword: [
           { required: true, message: '请确认密码', trigger: 'blur' },
@@ -121,8 +120,7 @@ export default {
       try {
         const res = await axios.post('api/sendCode', { email: this.form.email });
         const result = res.data;
-        console.log(result);
-        if (result) {
+        if (result.success) {
           this.messageColor = 'green';
           this.message = '验证码已发送到邮箱';
           this.startCountdown();  // 开始倒计时
