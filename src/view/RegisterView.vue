@@ -118,7 +118,7 @@ export default {
       }
 // vcio mmnk jfeu sdhd
       try {
-        const res = await axios.post('api/sendCode', { email: this.form.email });
+        const res = await axios.post('mail/sendCode', { email: this.form.email });
         const result = res.data;
         if (result.success) {
           this.messageColor = 'green';
