@@ -1,4 +1,5 @@
 # my-project
+i havent figured out what to do with this yet. ive only written the login and registration pages.s
 
 ## Project setup
 ```
