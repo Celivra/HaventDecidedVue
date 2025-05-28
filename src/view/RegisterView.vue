@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'RegisterView',
   data() {
@@ -88,13 +87,13 @@ export default {
   },
   methods: {
     login(){
-      this.$router.push('/')
+      this.$router.push('/login')
     },
     register() {
       this.$refs.registerForm.validate(async valid => {
         if (!valid) return;
         try{
-          const response = await axios.post('user/register', this.form);
+          const response = await this.axios.post('user/register', this.form);
           const result = response.data;
           if(result.success){
             this.messageColor = 'green';
@@ -118,7 +117,7 @@ export default {
       }
 // vcio mmnk jfeu sdhd
       try {
-        const res = await axios.post('mail/sendCode', { email: this.form.email });
+        const res = await this.axios.post('mail/sendCode', { email: this.form.email });
         const result = res.data;
         if (result.success) {
           this.messageColor = 'green';

@@ -1,6 +1,6 @@
 <template>
   <el-container class="login-container">
-    <el-card class="login-card" shadow="always">
+    <div class="login-card" shadow="always">
       <h2 class="title">登入</h2>
       <el-form :model="form" ref="loginForm" label-width="80px">
         <el-form-item label="用户名" prop="username">
@@ -15,13 +15,11 @@
           {{ message }}
         </div>
       </el-form>
-    </el-card>
+    </div>
   </el-container>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: "LoginView",
   data() {
@@ -47,7 +45,7 @@ export default {
       }
 
       try{
-        const respon = await axios.post('/user/login',this.form)
+        const respon = await this.axios.post('/user/login',this.form)
         const result = respon.data
         if(result.success){
           this.messageColor = 'green';
@@ -72,7 +70,8 @@ export default {
 <style scoped>
 .login-container {
   height: 100vh;
-  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  background: url('/src/assets/img/login-background.jpg') no-repeat;
+  background-size: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +81,7 @@ export default {
   width: 400px;
   padding: 30px 20px;
   border-radius: 35px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .title {
