@@ -8,7 +8,7 @@ import 'element-plus/dist/index.css'
 const app = createApp(App);
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
-app.config.globalProperties.$axios = axios
+app.config.globalProperties.axios = axios
 
 app.use(router);
 app.use(ElementPlus);

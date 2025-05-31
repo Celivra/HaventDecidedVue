@@ -1,20 +1,25 @@
 <template>
-  <router-view />
+  <div id="app">
+    <Header />
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'App',
-}
+<script setup>
+import Header from './components/HeaderComp.vue'
+import Footer from './components/FooterComp.vue'
 </script>
 
 <style>
+/* 全局样式 */
+body {
+  margin: 0;
+  font-family: 'Microsoft YaHei', sans-serif;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 </style>
