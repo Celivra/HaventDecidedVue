@@ -1,17 +1,38 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../view/LoginView.vue'
-import Dashboard from '../view/dashboardView.vue'
-import Register from '../view/RegisterView.vue'
-import Main from '../view/mainView.vue'
-import PageNotFound from '../view/PageNotFound.vue'
+import Home from '../view/HomeView.vue'
+import Category from '../view/CategoryView.vue'
+import Product from '../view/ProductView.vue'
+import Cart from '../view/CartView.vue'
 
 const routes = [
-  { path: '/login', component: Login, meta:{title:'LoginPage'}},
-  { path: '/dashboard', component: Dashboard, meta:{title:'Dashboard'}},
-  { path: '/register', component: Register, meta:{title:'Register'}},
-  { path: '/', component: Main, meta:{title:'HomePage'}},
-  { path: '/404', component: PageNotFound, meta:{title:'404'}}
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/category/:id',
+    name: 'Category',
+    component: Category,
+    props: true
+  },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: Product,
+    props: true
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
+  }
 ]
 
 
