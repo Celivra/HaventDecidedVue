@@ -25,6 +25,7 @@
 </template>
 
 <script setup>
+
 import { ref, computed } from 'vue'
 
 // 简单示例用本地状态（正式项目建议用 pinia）
