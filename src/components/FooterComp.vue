@@ -1,3 +1,4 @@
+<!-- FooterComp.vue -->
 <template>
-    <p>footer</p>
+  <footer><p>Footer</p></footer>
 </template>

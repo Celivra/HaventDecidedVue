@@ -1,39 +1,13 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../view/HomeView.vue'
-import Category from '../view/CategoryView.vue'
-import Product from '../view/ProductView.vue'
-import Cart from '../view/CartView.vue'
+import Shop from '../view/ShopView.vue';
+import Cart from '../view/CartView.vue';
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/category/:id',
-    name: 'Category',
-    component: Category,
-    props: true
-  },
-  {
-    path: '/product/:id',
-    name: 'Product',
-    component: Product,
-    props: true
-  },
-  {
-    path: '/cart',
-    name: 'Cart',
-    component: Cart
-  },
-  {
-    path: '/user',
-    name: 'User',
-    component: User
-  }
-]
+  { path: '/', name: 'Shop', component: Shop },
+  { path: '/cart', name: 'Cart', component: Cart },
+];
+
 
 
 const router = createRouter({
