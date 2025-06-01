@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100 p-4">
+  <div class="min-h-screen bg-gray-100 p-4" v-bind:class="cart">
     <h1 class="text-2xl font-bold mb-4">购物车</h1>
     <div v-if="cart.length" class="space-y-4">
       <div
@@ -42,4 +42,15 @@ const totalPrice = computed(() =>
 )
 </script>
 
-<style scoped></style>
+<style scoped>
+/* 添加进入/离开动画 */
+.cart-enter-active,
+.cart-leave-active {
+  transition: all 0.3s ease;
+}
+.cart-enter-from,
+.cart-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+</style>

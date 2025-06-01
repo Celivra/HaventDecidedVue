@@ -22,11 +22,11 @@
         :key="product.id"
         class="bg-white rounded-2xl shadow p-4 flex flex-col"
       >
-        <img
+        <!-- <img
           :src="product.image"
           :alt="product.title"
           class="w-full h-40 object-cover rounded-xl mb-4"
-        />
+        /> -->
         <h2 class="text-lg font-semibold mb-2">{{ product.title }}</h2>
         <p class="text-green-600 font-bold mb-4">￥{{ product.price }}</p>
         <button
@@ -74,4 +74,29 @@ function addToCart(product) {
 </script>
 
 <style scoped>
+/* 产品卡片悬停时稍微放大和阴影加深 */
+div[class*="bg-white"]:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 按钮悬停时颜色渐变 */
+button {
+  transition: background-color 0.3s ease;
+}
+
+/* 购物车数量角标抖动动画 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-2px); }
+  40%, 80% { transform: translateX(2px); }
+}
+
+span.absolute {
+  animation: shake 2s infinite;
+  /* 可选：放大点，提高识别度 */
+  font-weight: 700;
+  font-size: 0.75rem;
+}
 </style>
