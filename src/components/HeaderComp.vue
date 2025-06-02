@@ -5,8 +5,9 @@
   <nav class="navigation">
     <div class="nav-item">
       <a href="/"><div>Home</div></a>
-      <a href="/cart"><div>Cart</div></a>
-      <a href="/login"><div style="margin-left: 50%;">Login</div></a>
+      <a href="/cart"><div style="margin-right: 40%;">Cart</div></a>
+      <a v-if="user === null" href="/login"><div>Login</div></a>
+      <div v-if="user" v-text="user.username"></div>
       <div v-if="user" v-on:click="logout">Logout</div>
     </div>
   </nav>
@@ -40,7 +41,7 @@
   color: white;
 }
 .nav-item{
-  width: 50%;
+  width: 60%;
   margin-left: 41%;
 }
 .nav-item div{

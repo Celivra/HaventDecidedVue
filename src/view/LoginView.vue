@@ -53,7 +53,7 @@ export default {
           this.messageColor = 'green';
           this.message = result.message;
           localStorage.setItem('user', JSON.stringify(result.user));
-          this.$router.push('/dashboard')
+          this.$router.push('/')
         } else {
           this.messageColor = 'red';
           this.message = result.message;
