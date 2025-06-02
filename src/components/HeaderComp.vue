@@ -4,8 +4,8 @@
   </header>
   <nav class="navigation">
     <div class="nav-item">
-      <a href="/"><div>Home</div></a>
-      <a href="/cart"><div style="margin-right: 40%;">Cart</div></a>
+      <div v-on:click="()=>{$router.push('/')}">Home</div>
+      <div v-on:click="()=>{$router.push('/cart')}" style="margin-right: 40%;">Cart</div>
       <a v-if="user === null" href="/login"><div>Login</div></a>
       <div v-if="user" v-text="user.username"></div>
       <div v-if="user" v-on:click="logout">Logout</div>

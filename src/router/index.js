@@ -4,12 +4,14 @@ import Shop from '../view/ShopView.vue';
 import Cart from '../view/CartView.vue';
 import Login from '../view/LoginView.vue'
 import Register from '../view/RegisterView.vue'
+import PageNotFound from '../view/PageNotFound.vue'
 
 const routes = [
   { path: '/', name: 'Shop', component: Shop , meta:{title:'Home'}},
   { path: '/cart', name: 'Cart', component: Cart  , meta:{title:'Cart'}},
   { path: '/login', name: 'Login', component: Login , meta:{title:'Login'}},
   { path: '/register', name: 'Register', component: Register , meta:{title:'Register'}},
+  { path: '/404', name: 'PageNotFound', component: PageNotFound, meta:{title:'404 Error'}},
 ];
 
 
