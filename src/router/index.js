@@ -6,10 +6,10 @@ import Login from '../view/LoginView.vue'
 import Register from '../view/RegisterView.vue'
 
 const routes = [
-  { path: '/', name: 'Shop', component: Shop },
-  { path: '/cart', name: 'Cart', component: Cart },
-  { path: '/login', name: 'Login', component: Login},
-  { path: '/register', name: 'Register', component: Register},
+  { path: '/', name: 'Shop', component: Shop , meta:{title:'Home'}},
+  { path: '/cart', name: 'Cart', component: Cart  , meta:{title:'Cart'}},
+  { path: '/login', name: 'Login', component: Login , meta:{title:'Login'}},
+  { path: '/register', name: 'Register', component: Register , meta:{title:'Register'}},
 ];
 
 
@@ -20,6 +20,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=>{
+  console.log("router before each")
   const user = localStorage.getItem('user')
   const pathExists = routes.find(route => route.path === to.path);
   if (!pathExists) {
@@ -29,6 +30,7 @@ router.beforeEach((to, from, next)=>{
     next({path:'/', query:{message:'请登入'}});
   }
   else{
+    console.log(user)
     if (to.meta && to.meta.title) {
       document.title = to.meta.title
     } else {

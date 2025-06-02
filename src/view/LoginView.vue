@@ -1,4 +1,4 @@
-<template>Add commentMore actions
+<template>
   <el-container class="login-container">
     <div class="login-card" shadow="always">
       <h2 class="title">登入</h2>
@@ -9,8 +9,10 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" type="password" show-password />
         </el-form-item>
-        <el-button type="primary" style="width: 30%" @click="login">登入</el-button>
-        <el-button type="primary" style="width: 30%" @click="register">注册</el-button>
+        <el-form-item>
+          <el-button type="primary" style="width: 30%;" @click="login">登入</el-button>
+          <el-button type="primary" style="width: 30%;" @click="register">注册</el-button>
+        </el-form-item>
         <div class="message" v-if="message" :style="{ color: messageColor }">
           {{ message }}
         </div>

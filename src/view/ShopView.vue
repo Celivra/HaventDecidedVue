@@ -1,5 +1,6 @@
 <!-- src/views/Shop.vue -->
 <template>
+  <HeaderComp />
   <div class="min-h-screen bg-gray-100">
     <!-- Navbar -->
     <header class="bg-white shadow p-4 flex justify-between items-center">
@@ -38,6 +39,7 @@
       </div>
     </main>
   </div>
+  <FooterComp />
 </template>
 
 <script setup>
@@ -45,6 +47,8 @@ import { ref } from 'vue';
 import { ShoppingCartIcon } from 'lucide-vue-next';
 // eslint-disable-next-line no-unused-vars
 import { useRouter } from 'vue-router';
+import HeaderComp from '@/components/HeaderComp.vue';
+import FooterComp from '@/components/FooterComp.vue';
 
 const products = ref([
   {

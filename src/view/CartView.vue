@@ -1,4 +1,5 @@
 <template>
+  <HeaderComp />
   <div class="min-h-screen bg-gray-100 p-4" v-bind:class="cart">
     <h1 class="text-2xl font-bold mb-4">购物车</h1>
     <div v-if="cart.length" class="space-y-4">
@@ -22,10 +23,13 @@
     </div>
     <div v-else class="text-center text-gray-500">购物车为空</div>
   </div>
+  <FooterComp />
 </template>
 
 <script setup>
 
+import FooterComp from '@/components/FooterComp.vue'
+import HeaderComp from '@/components/HeaderComp.vue'
 import { ref, computed } from 'vue'
 
 // 简单示例用本地状态（正式项目建议用 pinia）

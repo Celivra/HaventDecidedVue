@@ -7,10 +7,33 @@
       <a href="/"><div>Home</div></a>
       <a href="/cart"><div>Cart</div></a>
       <a href="/login"><div style="margin-left: 50%;">Login</div></a>
+      <div v-if="user" v-on:click="logout">Logout</div>
     </div>
   </nav>
 </template>
-
+<script>
+  export default{
+    name: 'HeaderComp',
+    data(){
+      return{
+        user: null,
+      }
+    },
+    methods:{
+      logout(){
+        localStorage.removeItem("user");
+        this.user = null;
+        this.$router.push('/')
+      }
+    },
+    created(){
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        this.user = JSON.parse(userData);
+      }
+    }
+  }
+</script>
 <style scoped>
 .navigation{
   background-color: #367d38;

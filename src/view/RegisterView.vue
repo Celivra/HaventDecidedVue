@@ -34,8 +34,8 @@
           <el-input v-model="form.confirmPassword" type="password" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 40%" @click="register">注册</el-button>
-          <el-button type="primary" style="width: 40%" @click="login">返回</el-button>
+          <el-button type="primary" style="width: 40%;" @click="register">注册</el-button>
+          <el-button type="primary" style="width: 40%;" @click="login">返回</el-button>
         </el-form-item>
         <div class="message" v-if="message" :style="{ color: messageColor }">
           {{ message }}
