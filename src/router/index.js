@@ -22,7 +22,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next)=>{
-  console.log("router before each")
   const user = localStorage.getItem('user')
   const pathExists = routes.find(route => route.path === to.path);
   if (!pathExists) {

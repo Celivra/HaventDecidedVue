@@ -1,38 +1,37 @@
 <template>
   <HeaderComp />
-  <div class="min-h-screen bg-gray-100 p-4" v-bind:class="cart">
-    <h1 class="text-2xl font-bold mb-4">购物车</h1>
-    <div v-if="cart.length" class="space-y-4">
+  <div class="cart-page">
+    <h1 class="cart-title">购物车</h1>
+
+    <div v-if="cart.length" class="cart-list">
       <div
         v-for="(item, index) in cart"
         :key="index"
-        class="bg-white p-4 rounded-xl shadow flex justify-between items-center"
+        class="cart-item"
       >
-        <div>
-          <h2 class="font-semibold">{{ item.title }}</h2>
-          <p class="text-green-600">￥{{ item.price }}</p>
+        <div class="item-info">
+          <h2 class="item-title">{{ item.title }}</h2>
+          <p class="item-price">￥{{ item.price }}</p>
         </div>
-        <button
-          class="text-red-500 hover:underline"
-          @click="removeFromCart(index)"
-        >
+        <button class="remove-button" @click="removeFromCart(index)">
           移除
         </button>
       </div>
-      <p class="text-lg font-bold text-right">总计: ￥{{ totalPrice }}</p>
+
+      <p class="cart-total">总计: ￥{{ totalPrice }}</p>
     </div>
-    <div v-else class="text-center text-gray-500">购物车为空</div>
+
+    <div v-else class="empty-message">购物车为空</div>
   </div>
   <FooterComp />
 </template>
 
 <script setup>
-
+import { ref, computed } from 'vue'
 import FooterComp from '@/components/FooterComp.vue'
 import HeaderComp from '@/components/HeaderComp.vue'
-import { ref, computed } from 'vue'
 
-// 简单示例用本地状态（正式项目建议用 pinia）
+// 示例数据（正式项目建议使用 pinia 或 Vuex 管理全局状态）
 const cart = ref([
   { title: '无线耳机', price: 199 },
   { title: '蓝牙音箱', price: 299 }
@@ -48,11 +47,85 @@ const totalPrice = computed(() =>
 </script>
 
 <style scoped>
-/* 添加进入/离开动画 */
+.cart-page {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  padding: 1.5rem;
+}
+
+.cart-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-item {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.item-price {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.remove-button {
+  color: #ef4444;
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.remove-button:hover {
+  color: #dc2626;
+}
+
+.cart-total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+}
+
+.empty-message {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+/* 动画效果 */
 .cart-enter-active,
 .cart-leave-active {
   transition: all 0.3s ease;
 }
+
 .cart-enter-from,
 .cart-leave-to {
   opacity: 0;
